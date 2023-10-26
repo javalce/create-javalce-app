@@ -2,12 +2,6 @@
 
 Create projects as Javier would. Based on [create-appncy](https://github.com/goncy/create-appncy)
 
-## Installation
-
-```bash
-pnpm install -g javalce-app
-```
-
 ## Usage
 
 ```bash
