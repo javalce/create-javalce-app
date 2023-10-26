@@ -82,7 +82,7 @@ async function main() {
   // Log outro message
   console.log(`✨ Project created ✨`);
   console.log(`\n${color.yellow('Next steps:')}`);
-  console.log(`\n${color.green('cd')}${project.name}`);
+  console.log(`\n${color.green('cd')} ${project.name}`);
   console.log(`${color.green('pnpm')} install`);
   console.log(`${color.green('pnpm')} dev`);
   console.log('\n---\n');
