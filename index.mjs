@@ -86,7 +86,7 @@ async function main() {
   console.log(`${color.green('pnpm')} install`);
   console.log(`${color.green('pnpm')} dev`);
   console.log('\n---\n');
-  console.log(`Questions 👀? ${color.underline(color.cyan('https://x.com/javalce'))}`);
+  console.log(`Questions 👀? ${color.underline(color.cyan('https://x.com/javalce29'))}`);
 }
 
 main().catch(console.error);

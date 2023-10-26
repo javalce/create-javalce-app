@@ -26,4 +26,4 @@ pnpm create javalce-app --help
 
 ## Questions?
 
-If you have any questions, feel free to open an issue or contact me on [X](https://x.com/javalce).
+If you have any questions, feel free to open an issue or contact me on [X](https://x.com/javalce29).
