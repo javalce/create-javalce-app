@@ -1,6 +1,6 @@
 # Create javalce-app
 
-Create projects as Javier would.
+Create projects as Javier would. Based on [create-appncy](https://github.com/goncy/create-appncy)
 
 ## Installation
 
