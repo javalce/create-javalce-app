@@ -19,7 +19,12 @@ const args = yargs(hideBin(process.argv)).options({
   template: {
     alias: 't',
     type: 'string',
-    description: 'Template to use',
+    description: 'Framework to use',
+  },
+  tailwind: {
+    alias: 'tw',
+    type: 'boolean',
+    description: 'Use Tailwind CSS',
   },
 });
 
@@ -43,7 +48,7 @@ async function main() {
       },
       {
         type: 'select',
-        name: 'framework',
+        name: 'template',
         message: 'Select a framework:',
         initial: 0,
         choices: [
@@ -71,7 +76,7 @@ async function main() {
   const template = path.join(
     path.dirname(fileURLToPath(import.meta.url)),
     'templates',
-    `${project.framework}-ts-${project.tailwind && 'tw'}`,
+    `${project.template}-ts-${project.tailwind && 'tw'}`,
   );
   const destination = path.join(process.cwd(), project.name);
 
