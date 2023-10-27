@@ -32,7 +32,7 @@ async function main() {
       {
         type: 'text',
         name: 'name',
-        message: 'What is the name of the project?',
+        message: 'What is your project named?',
         initial: 'my-project',
         validate: (value) => {
           if (value.match(/[^a-zA-Z0-9-_]+/g)) {
@@ -43,15 +43,21 @@ async function main() {
       },
       {
         type: 'select',
-        name: 'template',
-        message: 'What template would you like to use?',
+        name: 'framework',
+        message: 'Select a framework:',
         initial: 0,
         choices: [
-          { title: 'React + ESLint (Standard config) + TypeScript', value: 'react-eslint-ts' },
-          { title: 'React + ESLint (Standard config) + TypeScript + Tailwind', value: 'react-eslint-ts-tw' },
-          { title: 'Next.js + ESLint (Standard config) + TypeScript', value: 'next-eslint-ts' },
-          { title: 'Next.js + ESLint (Standard config) + TypeScript + Tailwind', value: 'next-eslint-ts-tw' },
+          { title: 'React', value: 'react' },
+          { title: 'Next.js', value: 'next' },
         ],
+      },
+      {
+        type: 'toggle',
+        name: 'tailwind',
+        message: 'Would you like to use Tailwind CSS?',
+        initial: false,
+        active: 'Yes',
+        inactive: 'No',
       },
     ],
     {
@@ -62,7 +68,11 @@ async function main() {
     },
   );
 
-  const template = path.join(path.dirname(fileURLToPath(import.meta.url)), 'templates', project.template);
+  const template = path.join(
+    path.dirname(fileURLToPath(import.meta.url)),
+    'templates',
+    `${project.framework}-ts-${project.tailwind && 'tw'}`,
+  );
   const destination = path.join(process.cwd(), project.name);
 
   // Copy files from the template folder to the current directory
