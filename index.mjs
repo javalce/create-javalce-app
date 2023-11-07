@@ -76,7 +76,7 @@ async function main() {
   const template = path.join(
     path.dirname(fileURLToPath(import.meta.url)),
     'templates',
-    `${project.template}-ts-${project.tailwind && 'tw'}`,
+    `${project.template}-ts${project.tailwind ? '-tw' : ''}`,
   );
   const destination = path.join(process.cwd(), project.name);
 
