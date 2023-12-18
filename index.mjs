@@ -52,12 +52,14 @@ async function main() {
         message: 'Select a framework:',
         initial: 0,
         choices: [
+          { title: 'Vanilla', value: 'vanilla' },
           { title: 'React', value: 'react' },
           { title: 'Next.js', value: 'next' },
+          { title: 'Node.js', value: 'node' },
         ],
       },
       {
-        type: 'toggle',
+        type: (prev) => (prev === 'node' ? null : 'toggle'),
         name: 'tailwind',
         message: 'Would you like to use Tailwind CSS?',
         initial: false,
@@ -73,11 +75,13 @@ async function main() {
     },
   );
 
+  // Create the template name based on the user's choices
   let templateName = `${project.template}-ts`;
   if (project.tailwind) {
     templateName += '-tw';
   }
 
+  // Get the template and destination paths
   const template = path.join(path.dirname(fileURLToPath(import.meta.url)), 'templates', templateName);
   const destination = path.join(process.cwd(), project.name);
 

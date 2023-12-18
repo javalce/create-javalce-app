@@ -15,7 +15,15 @@ export default function Home() {
             rel='noopener noreferrer'
             target='_blank'
           >
-            By <Image priority alt='Vercel Logo' className='dark:invert' height={24} src='/vercel.svg' width={100} />
+            By{' '}
+            <Image
+              priority
+              alt='Vercel Logo'
+              className='dark:invert'
+              height={24}
+              src='/vercel.svg'
+              width={100}
+            />
           </a>
         </div>
       </div>
