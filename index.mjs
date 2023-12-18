@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 import { glob } from 'glob';
-import { cp, readFile, rename, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { appendFile, cp, readFile, unlink, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import color from 'picocolors';
@@ -30,6 +31,13 @@ const args = yargs(hideBin(process.argv)).options({
 
 // Override arguments passed on the CLI
 prompts.override(args.argv);
+
+// Rename a file
+async function renameFile(oldFile, newFile, pathname) {
+  const data = await readFile(path.join(pathname, oldFile));
+  await appendFile(path.join(pathname, newFile), data);
+  await unlink(path.join(pathname, oldFile));
+}
 
 async function main() {
   const project = await prompts(
@@ -82,7 +90,6 @@ async function main() {
   }
 
   // Get the template and destination paths
-  console.log(import.meta);
   const template = path.join(path.dirname(fileURLToPath(import.meta.url)), 'templates', templateName);
   const destination = path.join(process.cwd(), project.name);
 
@@ -101,15 +108,13 @@ async function main() {
   }
 
   // Rename _gitignore to .gitignore
-  // const data = await readFile(path.join(destination, '_gitignore'));
-  // await appendFile(path.join(destination, '.gitignore'), data);
-  // await unlink(path.join(destination, '_gitignore'));
-  await rename(path.join(destination, '_gitignore'), path.join(destination, '.gitignore'));
+  if (existsSync(path.join(destination, '_gitignore'))) {
+    await renameFile('_gitignore', '.gitignore', destination);
+  }
 
   // Rename _next-env.d.ts to next-env.d.ts
-  const nextEnv = await glob('_next-env.d.ts', { cwd: destination });
-  if (nextEnv.length > 0) {
-    await rename(path.join(destination, '_next-env.d.ts'), path.join(destination, 'next-env.d.ts'));
+  if (existsSync(path.join(destination, '_next-env.d.ts'))) {
+    await renameFile('_next-env.d.ts', 'next-env.d.ts', destination);
   }
 
   // Log outro message
