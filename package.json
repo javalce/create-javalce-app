@@ -1,6 +1,6 @@
 {
   "name": "create-javalce-app",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Create projects as javalce would",
   "main": "index.mjs",
   "bin": {
@@ -11,7 +11,7 @@
   },
   "files": [
     "index.mjs",
-    "templates/**/*"
+    "templates"
   ],
   "keywords": [],
   "author": "javalce",
@@ -28,6 +28,6 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "prettier": "^3.0.3"
+    "prettier": "^3.1.1"
   }
 }

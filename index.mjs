@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { glob } from 'glob';
-import { cp, readFile, writeFile } from 'node:fs/promises';
+import { appendFile, cp, readFile, unlink, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import color from 'picocolors';
@@ -94,6 +94,11 @@ async function main() {
 
     await writeFile(file, draft, 'utf-8');
   }
+
+  // Rename _gitignore to .gitignore
+  const data = await readFile(path.join(destination, '_gitignore'));
+  await appendFile(path.join(destination, '.gitignore'), data);
+  await unlink(path.join(destination, '_gitignore'));
 
   // Log outro message
   console.log(`✨ Project created ✨`);
