@@ -1,13 +1,13 @@
 {
   "name": "create-javalce-app",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Create projects as javalce would",
+  "main": "index.mjs",
   "bin": {
     "create-javalce-app": "index.mjs"
   },
   "scripts": {
-    "start": "node index.mjs",
-    "publish": "npm publish --access public"
+    "start": "node index.mjs"
   },
   "files": [
     "index.mjs",
