@@ -73,11 +73,12 @@ async function main() {
     },
   );
 
-  const template = path.join(
-    path.dirname(fileURLToPath(import.meta.url)),
-    'templates',
-    `${project.template}-ts${project.tailwind ? '-tw' : ''}`,
-  );
+  let templateName = `${project.template}-ts`;
+  if (project.tailwind) {
+    templateName += '-tw';
+  }
+
+  const template = path.join(path.dirname(fileURLToPath(import.meta.url)), 'templates', templateName);
   const destination = path.join(process.cwd(), project.name);
 
   // Copy files from the template folder to the current directory

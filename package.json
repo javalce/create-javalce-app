@@ -1,6 +1,6 @@
 {
   "name": "create-javalce-app",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Create projects as javalce would",
   "bin": {
     "create-javalce-app": "index.mjs"
@@ -9,6 +9,10 @@
     "start": "node index.mjs",
     "publish": "npm publish --access public"
   },
+  "files": [
+    "index.mjs",
+    "templates/**/*"
+  ],
   "keywords": [],
   "author": "javalce",
   "license": "ISC",

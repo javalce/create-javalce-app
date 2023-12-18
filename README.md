@@ -9,10 +9,6 @@ This CLI tool enables you to create projects using the templates I use for my pr
 You can create a new project interactively by running:
 
 ```bash
-npx create-javalce-app
-# or
-yarn create javalce-app
-# or
 pnpm create javalce-app
 ```
 
