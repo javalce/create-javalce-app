@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { glob } from 'glob';
-import { appendFile, cp, readFile, unlink, writeFile } from 'node:fs/promises';
+import { cp, readFile, rename, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import color from 'picocolors';
@@ -82,6 +82,7 @@ async function main() {
   }
 
   // Get the template and destination paths
+  console.log(import.meta);
   const template = path.join(path.dirname(fileURLToPath(import.meta.url)), 'templates', templateName);
   const destination = path.join(process.cwd(), project.name);
 
@@ -100,9 +101,16 @@ async function main() {
   }
 
   // Rename _gitignore to .gitignore
-  const data = await readFile(path.join(destination, '_gitignore'));
-  await appendFile(path.join(destination, '.gitignore'), data);
-  await unlink(path.join(destination, '_gitignore'));
+  // const data = await readFile(path.join(destination, '_gitignore'));
+  // await appendFile(path.join(destination, '.gitignore'), data);
+  // await unlink(path.join(destination, '_gitignore'));
+  await rename(path.join(destination, '_gitignore'), path.join(destination, '.gitignore'));
+
+  // Rename _next-env.d.ts to next-env.d.ts
+  const nextEnv = await glob('_next-env.d.ts', { cwd: destination });
+  if (nextEnv.length > 0) {
+    await rename(path.join(destination, '_next-env.d.ts'), path.join(destination, 'next-env.d.ts'));
+  }
 
   // Log outro message
   console.log(`✨ Project created ✨`);
