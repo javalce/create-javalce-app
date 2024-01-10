@@ -90,7 +90,11 @@ async function main() {
   }
 
   // Get the template and destination paths
-  const template = path.join(path.dirname(fileURLToPath(import.meta.url)), 'templates', templateName);
+  const template = path.join(
+    path.dirname(fileURLToPath(import.meta.url)),
+    'templates',
+    templateName,
+  );
   const destination = path.join(process.cwd(), project.name);
 
   // Copy files from the template folder to the current directory
