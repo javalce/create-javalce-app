@@ -12,12 +12,17 @@ You can create a new project interactively by running:
 pnpm create javalce-app
 ```
 
-You will be asked for the name of your project, then whether you want to create a `React` or `Next.js` project, and finally whether you want to add `TailwindCSS` to your project.
+You will be asked for the name of your project, then select the template you want to use. Currently supported templates are:
 
-```bash
-? Select a framework: ... React / Next.js
-? Would you like to use Tailwind CSS? .. No / Yes
-```
+- Next.js (next-ts)
+- Next.js with Tailwind CSS (next-ts-tw)
+- React (react-ts)
+- React with Tailwind CSS (react-ts-tw)
+- Node.js (node-ts)
+- Vanilla JS (vanilla-ts)
+- Vanilla JS with Tailwind CSS (vanilla-ts-tw)
+
+All templates come with TypeScript, ESLint and Prettier preconfigured.
 
 ## Non-interactive
 
@@ -28,16 +33,10 @@ create-javalce-app [options]
 
 Options:
     --version              Output the version number
-    -h, --help             Display help for command
+    --help                 Display help for command
     -n, --name <name>      Name of the project (default: "my-project")
-    -t, --template <name>  Template to use (default: "react")
-    -tw, --tailwind        Add TailwindCSS to the project (default: false)
+    -t, --template <name>  Template to use (default: "react-ts")
 ```
-
-Currently supported templates are:
-
-- `react`: React project with TypeScript, ESLint and Prettier
-- `next`: Next.js project with TypeScript, ESLint and Prettier
 
 ## Questions?
 

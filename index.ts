@@ -1,14 +1,45 @@
 #!/usr/bin/env node
 
 import { glob } from 'glob';
-import { existsSync } from 'node:fs';
-import { appendFile, cp, readFile, unlink, writeFile } from 'node:fs/promises';
+import { cp, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import color from 'picocolors';
 import prompts from 'prompts';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
+
+// List of templates
+const TEMPLATES = [
+  {
+    title: 'Next.js + ESLint + Prettier + TypeScript',
+    value: 'next-ts',
+  },
+  {
+    title: 'Next.js + Tailwind CSS + ESLint + Prettier + TypeScript',
+    value: 'next-ts-tw',
+  },
+  {
+    title: 'React (vite) + ESLint + Prettier + TypeScript',
+    value: 'react-ts',
+  },
+  {
+    title: 'React (vite) + Tailwind CSS + ESLint + Prettier + TypeScript',
+    value: 'react-ts-tw',
+  },
+  {
+    title: 'Node.js + ESLint + Prettier + TypeScript',
+    value: 'node-ts',
+  },
+  {
+    title: 'Vanilla + ESLint + Prettier + TypeScript',
+    value: 'vanilla-ts',
+  },
+  {
+    title: 'Vanilla + Tailwind CSS + ESLint + Prettier + TypeScript',
+    value: 'vanilla-ts-tw',
+  },
+];
 
 // Specify CLI arguments
 const args = yargs(hideBin(process.argv)).options({
@@ -20,33 +51,25 @@ const args = yargs(hideBin(process.argv)).options({
   template: {
     alias: 't',
     type: 'string',
-    description: 'Framework to use',
-  },
-  tailwind: {
-    alias: 'tw',
-    type: 'boolean',
-    description: 'Use Tailwind CSS',
+    description: 'Template to use',
   },
 });
 
 // Override arguments passed on the CLI
 prompts.override(args.argv);
 
-// Rename a file
-async function renameFile(oldFile, newFile, pathname) {
-  const data = await readFile(path.join(pathname, oldFile));
-  await appendFile(path.join(pathname, newFile), data);
-  await unlink(path.join(pathname, oldFile));
-}
-
 async function main() {
+  const {
+    _: [initialName, initialProject],
+  } = await args.argv;
+
   const project = await prompts(
     [
       {
         type: 'text',
         name: 'name',
-        message: 'What is your project named?',
-        initial: 'my-project',
+        message: 'What is the name of your project?',
+        initial: initialName || 'my-project',
         validate: (value) => {
           if (value.match(/[^a-zA-Z0-9-_]+/g)) {
             return 'Project name can only contain letters, numbers, dashes and underscores.';
@@ -58,21 +81,8 @@ async function main() {
         type: 'select',
         name: 'template',
         message: 'Select a framework:',
-        initial: 0,
-        choices: [
-          { title: 'Vanilla', value: 'vanilla' },
-          { title: 'React', value: 'react' },
-          { title: 'Next.js', value: 'next' },
-          { title: 'Node.js', value: 'node' },
-        ],
-      },
-      {
-        type: (prev) => (prev === 'node' ? null : 'toggle'),
-        name: 'tailwind',
-        message: 'Would you like to use Tailwind CSS?',
-        initial: false,
-        active: 'Yes',
-        inactive: 'No',
+        initial: initialProject || 0,
+        choices: TEMPLATES,
       },
     ],
     {
@@ -83,18 +93,14 @@ async function main() {
     },
   );
 
-  // Create the template name based on the user's choices
-  let templateName = `${project.template}-ts`;
-  if (project.tailwind) {
-    templateName += '-tw';
-  }
-
-  // Get the template and destination paths
+  // Get the template folder for the selected template
   const template = path.join(
     path.dirname(fileURLToPath(import.meta.url)),
     'templates',
-    templateName,
+    project.template,
   );
+
+  // Get the destination folder for the project
   const destination = path.join(process.cwd(), project.name);
 
   // Copy files from the template folder to the current directory
@@ -109,16 +115,6 @@ async function main() {
     const draft = data.replace(/{{name}}/g, project.name);
 
     await writeFile(file, draft, 'utf-8');
-  }
-
-  // Rename _gitignore to .gitignore
-  if (existsSync(path.join(destination, '_gitignore'))) {
-    await renameFile('_gitignore', '.gitignore', destination);
-  }
-
-  // Rename _next-env.d.ts to next-env.d.ts
-  if (existsSync(path.join(destination, '_next-env.d.ts'))) {
-    await renameFile('_next-env.d.ts', 'next-env.d.ts', destination);
   }
 
   // Log outro message
