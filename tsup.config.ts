@@ -15,7 +15,13 @@ export default defineConfig({
     await cp(
       path.join(path.dirname(fileURLToPath(import.meta.url)), 'templates'),
       path.join('dist', 'templates'),
-      { recursive: true },
+      {
+        recursive: true,
+        // Exclude the node_modules folder
+        filter: (src) => {
+          return !src.includes('node_modules');
+        },
+      },
     );
   },
 });
