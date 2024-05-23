@@ -21,7 +21,6 @@ module.exports = {
   extends: [
     require.resolve('@vercel/style-guide/eslint/typescript'),
     require.resolve('@vercel/style-guide/eslint/react'),
-    'plugin:prettier/recommended',
   ],
   overrides: [
     {
