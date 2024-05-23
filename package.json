@@ -24,13 +24,13 @@
     "url": "https://github.com/javalce/create-javalce-app.git"
   },
   "dependencies": {
-    "glob": "^10.3.10",
-    "picocolors": "^1.0.0",
+    "glob": "^10.3.16",
+    "picocolors": "^1.0.1",
     "prompts": "^2.4.2",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@types/node": "^20.12.7",
+    "@types/node": "^20.12.12",
     "@types/prompts": "^2.4.9",
     "@types/yargs": "^17.0.32",
     "prettier": "^3.2.5",
