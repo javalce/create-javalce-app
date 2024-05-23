@@ -8,10 +8,7 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  extends: [
-    require.resolve('@vercel/style-guide/eslint/typescript'),
-    'plugin:prettier/recommended',
-  ],
+  extends: [require.resolve('@vercel/style-guide/eslint/typescript')],
   overrides: [
     {
       env: {
