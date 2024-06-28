@@ -1,17 +1,11 @@
 const { resolve } = require('node:path');
 
-const project = resolve(__dirname, 'tsconfig.eslint.json');
+const project = resolve(__dirname, 'tsconfig.json');
 
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-  },
+  root: true,
   settings: {
-    react: {
-      version: 'detect',
-    },
     'import/resolver': {
       typescript: {
         project,
@@ -19,6 +13,8 @@ module.exports = {
     },
   },
   extends: [
+    require.resolve('@vercel/style-guide/eslint/browser'),
+    require.resolve('@vercel/style-guide/eslint/node'),
     require.resolve('@vercel/style-guide/eslint/typescript'),
     require.resolve('@vercel/style-guide/eslint/react'),
   ],
@@ -31,13 +27,28 @@ module.exports = {
     },
   ],
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
     project,
   },
-  parser: '@typescript-eslint/parser',
-  plugins: ['react', 'react-refresh'],
+  plugins: ['react-refresh'],
   rules: {
+    // General rules
+    'padding-line-between-statements': [
+      'warn',
+      { blankLine: 'always', prev: '*', next: 'return' },
+      { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
+      {
+        blankLine: 'any',
+        prev: ['const', 'let', 'var'],
+        next: ['const', 'let', 'var'],
+      },
+    ],
+    // TypeScript rules
+    '@typescript-eslint/no-shadow': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/no-confusing-void-expression': 'off',
+    // React rules
     'react-refresh/only-export-components': ['error', { allowConstantExport: true }],
     'react/self-closing-comp': 'warn',
     'react/jsx-sort-props': [
@@ -49,20 +60,31 @@ module.exports = {
         reservedFirst: true,
       },
     ],
-    'padding-line-between-statements': [
+    'jsx-a11y/no-static-element-interactions': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    // Import rules
+    'import/no-default-export': 'off',
+    'import/order': [
       'warn',
-      { blankLine: 'always', prev: '*', next: 'return' },
-      { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*' },
       {
-        blankLine: 'any',
-        prev: ['const', 'let', 'var'],
-        next: ['const', 'let', 'var'],
+        groups: ['type', 'builtin', 'object', 'external', 'internal', 'parent', 'sibling', 'index'],
+        pathGroups: [
+          {
+            pattern: '~/**',
+            group: 'external',
+            position: 'after',
+          },
+        ],
+        'newlines-between': 'always',
       },
     ],
-    '@typescript-eslint/no-shadow': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/no-floating-promises': 'off',
-    '@typescript-eslint/no-confusing-void-expression': 'off',
+    // Unicorn rules
+    'unicorn/filename-case': [
+      'error',
+      {
+        case: 'kebabCase',
+        ignore: ['App.tsx'],
+      },
+    ],
   },
 };
