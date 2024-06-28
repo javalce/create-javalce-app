@@ -24,17 +24,17 @@
     "url": "https://github.com/javalce/create-javalce-app.git"
   },
   "dependencies": {
-    "glob": "^10.3.16",
+    "glob": "^10.4.2",
     "picocolors": "^1.0.1",
     "prompts": "^2.4.2",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@types/node": "^20.12.12",
+    "@types/node": "^20.14.9",
     "@types/prompts": "^2.4.9",
     "@types/yargs": "^17.0.32",
-    "prettier": "^3.2.5",
-    "tsup": "^8.0.2",
-    "typescript": "^5.4.5"
+    "prettier": "^3.3.2",
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.2"
   }
 }
