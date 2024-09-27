@@ -1,6 +1,6 @@
 const { resolve } = require('node:path');
 
-const project = resolve(__dirname, 'tsconfig.eslint.json');
+const project = resolve(__dirname, 'tsconfig.json');
 
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
@@ -17,13 +17,9 @@ module.exports = {
     require.resolve('@vercel/style-guide/eslint/node'),
     require.resolve('@vercel/style-guide/eslint/typescript'),
   ],
-  parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
     project,
   },
-  plugins: ['@typescript-eslint'],
   rules: {
     // General rules
     'padding-line-between-statements': [

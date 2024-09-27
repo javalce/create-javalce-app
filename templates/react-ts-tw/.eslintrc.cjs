@@ -1,6 +1,6 @@
 const { resolve } = require('node:path');
 
-const project = resolve(__dirname, 'tsconfig.json');
+const project = [resolve(__dirname, 'tsconfig.node.json'), resolve(__dirname, 'tsconfig.app.json')];
 
 /** @type {import('eslint').Linter.Config} */
 module.exports = {
@@ -49,7 +49,6 @@ module.exports = {
     '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/no-confusing-void-expression': 'off',
     // React rules
-    'react-refresh/only-export-components': ['error', { allowConstantExport: true }],
     'react/self-closing-comp': 'warn',
     'react/jsx-sort-props': [
       'warn',
@@ -76,14 +75,6 @@ module.exports = {
           },
         ],
         'newlines-between': 'always',
-      },
-    ],
-    // Unicorn rules
-    'unicorn/filename-case': [
-      'error',
-      {
-        case: 'kebabCase',
-        ignore: ['App.tsx'],
       },
     ],
   },
