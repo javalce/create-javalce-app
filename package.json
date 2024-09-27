@@ -2,7 +2,7 @@
   "name": "create-javalce-app",
   "version": "1.1.2",
   "description": "Create projects as javalce would",
-  "main": "index.mjs",
+  "main": "dist/index.js",
   "bin": {
     "create-javalce-app": "dist/index.js"
   },
@@ -10,10 +10,11 @@
     "build": "tsup",
     "start": "node dist/index.js",
     "dev": "tsup --watch",
-    "bump": "pnpm build && git add -A dist && pnpm version patch --force && git tag latest --force && git push origin master --tags --force && pnpm publish --tag latest --force"
+    "prepack": "pnpm build",
+    "release": "bumpp && pnpm publish"
   },
   "files": [
-    "dist/**/*"
+    "dist"
   ],
   "keywords": [],
   "author": "javalce",
@@ -33,6 +34,7 @@
     "@types/node": "^22.7.3",
     "@types/prompts": "^2.4.9",
     "@types/yargs": "^17.0.33",
+    "bumpp": "^9.5.2",
     "prettier": "^3.3.3",
     "tsup": "^8.3.0",
     "typescript": "^5.6.2"
