@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { glob } from 'glob';
-import { cp, readFile, writeFile } from 'node:fs/promises';
+import { access, constants, cp, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import color from 'picocolors';
@@ -102,6 +102,22 @@ async function main() {
 
   // Get the destination folder for the project
   const destination = path.join(process.cwd(), project.name);
+
+  // Check if the destination folder already exists
+  const destinationExists = await (async () => {
+    try {
+      await access(destination, constants.R_OK | constants.W_OK);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  })();
+  if (destinationExists) {
+    console.log(
+      `Directory ${color.green(project.name)} already exists.\n\nEither try using another name, or remove the existing directory.`,
+    );
+    process.exit(0);
+  }
 
   // Copy files from the template folder to the current directory
   await cp(template, destination, { recursive: true });

@@ -117,6 +117,22 @@ async function main() {
     project.template
   );
   const destination = import_node_path.default.join(process.cwd(), project.name);
+  const destinationExists = await (async () => {
+    try {
+      await (0, import_promises.access)(destination, import_promises.constants.R_OK | import_promises.constants.W_OK);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  })();
+  if (destinationExists) {
+    console.log(
+      `Directory ${import_picocolors.default.green(project.name)} already exists.
+
+Either try using another name, or remove the existing directory.`
+    );
+    process.exit(0);
+  }
   await (0, import_promises.cp)(template, destination, { recursive: true });
   const files = await (0, import_glob.glob)("**/*", { nodir: true, cwd: destination, absolute: true });
   for await (const file of files) {
