@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-import { glob } from 'glob';
 import { access, constants, cp, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+import { glob } from 'glob';
 import color from 'picocolors';
 import prompts from 'prompts';
 import yargs from 'yargs';
@@ -58,7 +59,7 @@ const args = yargs(hideBin(process.argv)).options({
 // Override arguments passed on the CLI
 prompts.override(args.argv);
 
-async function main() {
+async function main(): Promise<void> {
   const {
     _: [initialName, initialProject],
   } = await args.argv;
@@ -69,11 +70,12 @@ async function main() {
         type: 'text',
         name: 'name',
         message: 'What is the name of your project?',
-        initial: initialName || 'my-project',
-        validate: (value) => {
+        initial: initialName ?? 'my-project',
+        validate: (value: string): boolean | string => {
           if (value.match(/[^a-zA-Z0-9-_]+/g)) {
             return 'Project name can only contain letters, numbers, dashes and underscores.';
           }
+
           return true;
         },
       },
@@ -81,7 +83,7 @@ async function main() {
         type: 'select',
         name: 'template',
         message: 'Select a framework:',
-        initial: initialProject || 0,
+        initial: initialProject ?? 0,
         choices: TEMPLATES,
       },
     ],
@@ -107,11 +109,13 @@ async function main() {
   const destinationExists = await (async () => {
     try {
       await access(destination, constants.R_OK | constants.W_OK);
+
       return true;
     } catch (error) {
       return false;
     }
   })();
+
   if (destinationExists) {
     console.log(
       `Directory ${color.green(project.name)} already exists.\n\nEither try using another name, or remove the existing directory.`,
@@ -126,7 +130,7 @@ async function main() {
   const files = await glob('**/*', { nodir: true, cwd: destination, absolute: true });
 
   // Read each file and replace the template variables
-  for await (const file of files) {
+  for (const file of files) {
     const data = await readFile(file, 'utf8');
     const draft = data.replace(/{{name}}/g, project.name);
 
