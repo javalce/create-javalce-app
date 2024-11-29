@@ -14,9 +14,9 @@
   },
   "prettier": "@javalce/prettier-config",
   "devDependencies": {
+    "@javalce/eslint-config": "0.8.2",
     "@javalce/prettier-config": "1.0.3",
-    "@vercel/style-guide": "6.0.0",
-    "eslint": "8.57.1",
+    "eslint": "9.15.0",
     "prettier": "3.4.1",
     "typescript": "5.7.2",
     "vite": "6.0.1"
