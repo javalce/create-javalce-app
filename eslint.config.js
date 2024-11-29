@@ -5,9 +5,6 @@ export default defineConfig({
   overrides: [
     {
       ignores: ['templates'],
-      rules: {
-        'no-console': 'off',
-      },
     },
   ],
 });
