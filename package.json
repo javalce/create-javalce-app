@@ -2,28 +2,30 @@
   "name": "create-javalce-app",
   "version": "1.2.0",
   "description": "Create projects as javalce would",
-  "main": "dist/index.js",
-  "bin": {
-    "create-javalce-app": "dist/index.js"
-  },
-  "scripts": {
-    "build": "tsup",
-    "start": "node dist/index.js",
-    "dev": "tsup --watch",
-    "prepack": "pnpm build",
-    "release": "bumpp && pnpm publish"
-  },
-  "files": [
-    "dist"
-  ],
   "keywords": [],
-  "author": "javalce",
-  "license": "ISC",
   "homepage": "https://github.com/javalce/create-javalce-app",
   "repository": {
     "type": "git",
     "url": "https://github.com/javalce/create-javalce-app.git"
   },
+  "license": "ISC",
+  "author": "javalce",
+  "main": "dist/index.js",
+  "bin": {
+    "create-javalce-app": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "format": "prettier --write .",
+    "prepack": "pnpm build",
+    "release": "bumpp && pnpm publish",
+    "start": "node dist/index.js"
+  },
+  "prettier": "@javalce/prettier-config",
   "dependencies": {
     "glob": "^11.0.0",
     "picocolors": "^1.1.1",
@@ -31,6 +33,7 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
+    "@javalce/prettier-config": "1.0.3",
     "@types/node": "^22.10.1",
     "@types/prompts": "^2.4.9",
     "@types/yargs": "^17.0.33",
