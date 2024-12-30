@@ -18,7 +18,7 @@
     "react-dom": "19.0.0"
   },
   "devDependencies": {
-    "@javalce/eslint-config": "^0.8.3",
+    "@javalce/eslint-config": "0.8.4",
     "@javalce/prettier-config": "1.0.3",
     "@next/eslint-plugin-next": "15.1.3",
     "@types/node": "22.10.2",
@@ -26,8 +26,8 @@
     "@types/react-dom": "19.0.2",
     "eslint": "9.17.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
-    "eslint-plugin-react": "^7.37.3",
-    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react": "7.37.3",
+    "eslint-plugin-react-hooks": "5.1.0",
     "prettier": "3.4.2",
     "typescript": "5.7.2"
   }

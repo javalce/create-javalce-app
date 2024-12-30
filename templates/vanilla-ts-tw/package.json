@@ -13,7 +13,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@javalce/eslint-config": "0.8.3",
+    "@javalce/eslint-config": "0.8.4",
     "@javalce/prettier-config": "1.0.3",
     "autoprefixer": "10.4.20",
     "eslint": "9.17.0",

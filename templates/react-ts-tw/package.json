@@ -17,7 +17,7 @@
     "react-dom": "19.0.0"
   },
   "devDependencies": {
-    "@javalce/eslint-config": "0.8.3",
+    "@javalce/eslint-config": "0.8.4",
     "@javalce/prettier-config": "1.0.3",
     "@types/node": "22.10.2",
     "@types/react": "19.0.2",
