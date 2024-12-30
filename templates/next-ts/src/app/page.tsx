@@ -4,91 +4,75 @@ import styles from './page.module.css';
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href='https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
-            rel='noopener noreferrer'
-            target='_blank'
-          >
-            By{' '}
-            <Image
-              priority
-              alt='Vercel Logo'
-              className={styles.vercelLogo}
-              height={24}
-              src='/vercel.svg'
-              width={100}
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
+    <div className={styles.page}>
+      <main className={styles.main}>
         <Image
           priority
-          alt='Next.js Logo'
+          alt='Next.js logo'
           className={styles.logo}
-          height={37}
+          height={38}
           src='/next.svg'
           width={180}
         />
-      </div>
+        <ol>
+          <li>
+            Get started by editing <code>src/app/page.tsx</code>.
+          </li>
+          <li>Save and see your changes instantly.</li>
+        </ol>
 
-      <div className={styles.grid}>
+        <div className={styles.ctas}>
+          <a
+            className={styles.primary}
+            href='https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
+            rel='noopener noreferrer'
+            target='_blank'
+          >
+            <Image
+              alt='Vercel logomark'
+              className={styles.logo}
+              height={20}
+              src='/vercel.svg'
+              width={20}
+            />
+            Deploy now
+          </a>
+          <a
+            className={styles.secondary}
+            href='https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
+            rel='noopener noreferrer'
+            target='_blank'
+          >
+            Read our docs
+          </a>
+        </div>
+      </main>
+      <footer className={styles.footer}>
         <a
-          className={styles.card}
-          href='https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
-          rel='noopener noreferrer'
-          target='_blank'
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          className={styles.card}
           href='https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
           rel='noopener noreferrer'
           target='_blank'
         >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
+          <Image aria-hidden alt='File icon' height={16} src='/file.svg' width={16} />
+          Learn
         </a>
-
         <a
-          className={styles.card}
           href='https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
           rel='noopener noreferrer'
           target='_blank'
         >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
+          <Image aria-hidden alt='Window icon' height={16} src='/window.svg' width={16} />
+          Examples
         </a>
-
         <a
-          className={styles.card}
-          href='https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
+          href='https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
           rel='noopener noreferrer'
           target='_blank'
         >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>Instantly deploy your Next.js site to a shareable URL with Vercel.</p>
+          <Image aria-hidden alt='Globe icon' height={16} src='/globe.svg' width={16} />
+          Go to nextjs.org →
         </a>
-      </div>
-    </main>
+      </footer>
+    </div>
   );
 }
