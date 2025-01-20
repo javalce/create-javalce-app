@@ -6,6 +6,10 @@ import reactLogo from './assets/react.svg';
 function App() {
   const [count, setCount] = useState(0);
 
+  function handleCount() {
+    setCount((count) => count + 1);
+  }
+
   return (
     <>
       <div>
@@ -18,7 +22,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className='card'>
-        <button type='button' onClick={() => setCount((count) => count + 1)}>
+        <button type='button' onClick={handleCount}>
           count is {count}
         </button>
         <p>
